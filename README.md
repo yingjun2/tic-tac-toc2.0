@@ -14,9 +14,15 @@ A brief introduction on our project about **M**onte **C**arlo **S**imulation.
   ![Tic-tac-toe](https://lh3.googleusercontent.com/EgfiSB2bdf7kuRfNQbe8Jaj_bhfrlfeRt2nzphA6jcbCQdy5iEku2uZyK-5_VWtWUCxi=w300)
 
 ## Team Member(s):
-  Yingjun Guan, Lan Li
-
+  Yingjun Guan, Lan Li. And special thanks to our instructor, John Weible
+  
 ## Project
+### Project Structure
+check the file [Framework_project](https://github.com/yingjun2/Final-project/blob/master/Framework_Project)
+
+### Project usage
+Clone the whole repository to the local space, run Model/Board_GUI.py. 
+
 ### Background:
 [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) is a world famous game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
 
@@ -30,15 +36,18 @@ A brief introduction on our project about **M**onte **C**arlo **S**imulation.
 + [ ] **No human experiences involved** - The program contains the idea of Exhaustive Attack method and the spirit of traversal, on the other hand, no human experience of the game is needed.
 + [ ] **Decision making** - Each possible solution is given appropriate weight for evaluation, and make the final decision; the process of decision making which based on the traversal on the next level(s) is called back propagation.
 
-### Purpose:
+### Purpose/Functions:
  - We are ambitious enough to generate a human-computer interactive GUI medium for playing the game. 
- - The player can choose to play on the offensive position or the defensive position.
- - The program can use the MCS to make the (best) decision.
+ - The player can choose to play on the offensive position or the defensive position. [Not fulfiled yet.]
+ - The player can choose to play with the AI in different levels (easy: totally random, medium: look only one step ahead, hard: traverse all possibilities)
+ - The program can use the MCS to make the (best) decision. 
  - The program can also help dig in some interesting research on tic-tac-toe, including but not limited to:
  ~~~~
  1. What's the winning rate of the offensive position / defensive position?
- 2. What is the probability of the first player winning in Tic Tac Toe as well as the second one winning?
+ 2. What's the potential skill level of the game?
  3. Is there a way to never lose at Tic-Tac-Toe?
+ 4. How's the winning rate for different levels of AIs?
+ 5. How much will the times of Monte Carlo Simulation affect the results.
  etc.
  ~~~~
  
