@@ -55,6 +55,14 @@ Clone the whole repository to the local space, run Model/Board_GUI.py.
  - The whole program applies the idea of recursion. The following figure can also helps to clarify the algorithm.
  ![Algorithm](http://i.imgur.com/L6uAKBD.png)
  
+### Future work:
+ - Efficiency. (When the hard level is selected, the program is very slow)
+ - Elimate the Redundancy. (Code repititions and referencing in chaos)
+ - In battle mode, both first and second player position should be selected.
+ - Tighter connection between 1st and 2nd modes.
+ - Training the machine. / try other algorithms.
+ - OOP improvement (eg: static programs.)
+ 
 ## Sources:
  - Software: Python 3.6 (PythonCharm), 
  - PyQT for UI design,
