@@ -140,9 +140,8 @@ class partb():
         d2: draw score for every pos
         board: the board?【3*3？yes】
         pc: all the possible vacant pos eq
-        position ： 棋盘上的空位 位置
+        position ：available positions(vacant)
         player positions
-        这个函数里面所有注释好，我再来看。
 
         """
         # choice = self.chooseRandomMoveFromList()
