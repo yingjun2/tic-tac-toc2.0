@@ -256,9 +256,9 @@ class chalWindow(QMainWindow):
         have parameter combo1 for first player mode
         """
         self.combo1.setObjectName("combo1")
-        self.combo1.addItem("hard")
-        self.combo1.addItem("medium")
         self.combo1.addItem("easy")
+        self.combo1.addItem("medium")
+        self.combo1.addItem("hard")
         self.combo1.setGeometry(QtCore.QRect(50, 120, 95, 50))
 
         self.combo2 = QComboBox(self.centralWidget)
@@ -266,9 +266,9 @@ class chalWindow(QMainWindow):
         have parameter combo2 for second player  mode 
         """
         self.combo2.setObjectName("combo2")
-        self.combo2.addItem("hard")
-        self.combo2.addItem("medium")
         self.combo2.addItem("easy")
+        self.combo2.addItem("medium")
+        self.combo2.addItem("hard")
         self.combo2.setGeometry(QtCore.QRect(200, 120, 95, 50))
 
         # input the parameter for Monte  Carlo rounds
