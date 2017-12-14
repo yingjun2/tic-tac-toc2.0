@@ -1,7 +1,6 @@
 import copy
 import random
 from Model.Med_MCplay import Med_Test
-from Model.Hard_MCplay import Hard_Test
 
 
 class partb():
@@ -17,6 +16,7 @@ class partb():
         self.board = list('---------')
         from Model.Hard_MCplay import Hard_Test
         self.Hard_Test = Hard_Test()
+
     #         print(self.lvla,self.lvlb)
     #         print(self.board)
 
@@ -48,7 +48,8 @@ class partb():
                     self.hard(board)
                     m = board.count('-')
 
-                            # print(board)
+
+                    # print(board)
         if self.isWinner(board) == 1:
             state = 'w';
         elif self.isDraw(board) == 1:
@@ -84,13 +85,45 @@ class partb():
         # print(board)##
         return board
 
+    def MC_trail1(self, board: object, pc: object, n: object = 1, w2: object = [0] * 9, l2: object = [0] * 9,
+                  d2: object = [0] * 9) -> object:
+        # choice = self.chooseRandomMoveFromList()
+        """
+
+        player positions
+        :type board: object
+        """
+        x = 0
+        while x <= n:
+            x += 1
+            choice = random.choice(pc)
+            board1 = copy.copy(board)
+            if self.isWin(Med_Test.selection(board1, choice)) is True:
+                w2[choice] += 1
+            # elif self.isXLost(self.selection(board1,choice)) is True:
+            #     l2[choice] += 1
+            elif self.isDraw(self.selection(board1, choice)) is True:
+                d2[choice] += 1
+                # elif self.notFinished(self.selection(board1,choice)) is True:
+                #     choice1 = self.chooseRandomMoveFromList(board1)
+                #     board2 = copy.copy(board1)
+                #     (w3, l3, d3) = self.MC_trail(board2,choice1, 1, w2, l2, d2)
+                #     if sum(w3) - sum(w2) != 0:
+                #         l2[choice] += 1
+                #     # if sum(l3) - sum(l2) != 0:
+                #     #     l2[choice] += 1
+                #     if sum(d3) - sum(d2) != 0:
+                #         d2[choice] += 1
+
+        return (w2, l2, d2)
+
     def medium(self, board):
         pc = [i for i, j in enumerate(board) if j == '-']
-        (w2, l2, d2) = Med_Test.MC_trail(self, self.board, pc,1000, [0] * 9, [0] * 9, [0] * 9)
+        (w2, l2, d2) = self.MC_trail1(board, pc, self.times, [0] * 9, [0] * 9, [0] * 9)
         # print(w2,l2,d2)
-        move = Med_Test.auto_selection(self, w2, l2, d2)
+        move = self.auto_selection(w2, l2, d2)
         while move not in pc:
-            move = Med_Test.auto_selection(self, w2, l2, d2)
+            move = self.auto_selection(w2, l2, d2)
         # move = random.choice(pc)
         self.selection(board, move)
         #         board.pop(0)
@@ -98,27 +131,39 @@ class partb():
         # print(board)##
         return board
 
-    def MC_trail(self,board,pc,n=1,w2=[0]*9,l2=[0]*9,d2=[0]*9):
+    def MC_trail(self, board, pc, n=1, w2=[0] * 9, l2=[0] * 9, d2=[0] * 9):
         # choice = self.chooseRandomMoveFromList()
         """
+        what does w2,l2,d2,board,pc mean?
+        w2: win [0,0,0,0,0,0,0,0,0] initialize the winning score for every position
+        l2: lose score for every pos
+        d2: draw score for every pos
+        board: the board?【3*3？yes】
+        pc: all the possible vacant pos eq
+        position ： 棋盘上的空位 位置
+        player positions
+        这个函数里面所有注释好，我再来看。
 
+        """
+        # choice = self.chooseRandomMoveFromList()
+        """
         player positions
         """
-        x=0
-        while x<=n:
-            x+=1
-            choice=random.choice(pc)
-            board1=copy.copy(board)
+        x = 0
+        while x <= n:
+            x += 1
+            choice = random.choice(pc)
+            board1 = copy.copy(board)
             if self.isWin(self.selection(board1, choice)) is True:
                 w2[choice] += 1
             # elif self.isXLost(self.selection(board1,choice)) is True:
             #     l2[choice] += 1
-            elif self.isDraw(self.selection(board1,choice)) is True:
+            elif self.isDraw(self.selection(board1, choice)) is True:
                 d2[choice] += 1
-            elif self.notFinished(self.selection(board1,choice)) is True:
+            elif self.notFinished(self.selection(board1, choice)) is True:
                 # choice1 = [i for i, j in enumerate(board1) if j == '-']
                 choice1 = self.chooseRandomMoveFromList(board1)
-                (w3, l3, d3) = self.MC_trail(board1,choice1, 1, w2, l2, d2)
+                (w3, l3, d3) = self.MC_trail(board1, choice1, 1, w2, l2, d2)
                 if sum(w3) - sum(w2) != 0:
                     l2[choice] += 1
                 # if sum(l3) - sum(l2) != 0:
@@ -128,7 +173,7 @@ class partb():
 
         return w2, l2, d2
 
-    def selection(self, board,n):
+    def selection(self, board, n):
         """
         This is a manually selection.
 
@@ -144,36 +189,34 @@ class partb():
                 #         print("The position has already been occupied")
         return board
 
-    def auto_selection(self,w2,l2,d2) -> int:
+    def auto_selection(self, w2, l2, d2) -> int:
 
-            # this is a 2nd method for auto-selection.
-            # The problem is that that max wining occurrence is not enough to win.
-            # the example is in the next cell
-            """
-            This program simply select the best move by count the most win occurrence.
-            """
-            for i in range(9):
-                if l2[i] != 0:
-                    w2[i] = 0
+        # this is a 2nd method for auto-selection.
+        # The problem is that that max wining occurrence is not enough to win.
+        # the example is in the next cell
+        """
+        This program simply select the best move by count the most win occurrence.
+        """
+        for i in range(9):
+            if l2[i] != 0:
+                w2[i] = 0
 
-            if w2.index(max(w2))>0:
-                move = w2.index(max(w2))
-            else:
-                move = random.choice([0,1,2,3,4,5,6,7,8])
+        if w2.index(max(w2)) > 0:
+            move = w2.index(max(w2))
+        else:
+            move = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8])
 
-            return move
+        return move
 
-    def chooseRandomMoveFromList(self,board):
+    def chooseRandomMoveFromList(self, board):
         pc = [i for i, j in enumerate(board) if j == '-']
         #     print(pc)
         return pc
 
     def hard(self, board):
-
-        pc = self.chooseRandomMoveFromList(self.board)
-        (w2, l2, d2) = self.MC_trail(self.board, pc,self.times, [0] * 9, [0] * 9, [0] * 9)
+        pc = self.chooseRandomMoveFromList(board)
+        (w2, l2, d2) = self.MC_trail(board, pc, self.times, [0] * 9, [0] * 9, [0] * 9)
         move = self.auto_selection(w2, l2, d2)
-
         while move not in pc:
             move = self.auto_selection(w2, l2, d2)
         # move = random.choice(pc)
@@ -181,8 +224,9 @@ class partb():
         #         board.pop(0)
         #         m = board.count('-')
         # print(board)##
-        return board
+        print(board)
 
+        return board
 
     def isWin(self, board):
         """
@@ -220,12 +264,12 @@ class partb():
 
         if (
                             board[2] is board[4] and
-                            board[4] is board[6] and
-                        board[4] is not '-'
+                            board[4] is board[6] and board[4] is not '-'
         ):
             return True
 
         return False
+
     #
     def isWinner(self, board):
         """
@@ -299,7 +343,8 @@ class partb():
         win = st_list.count('w') / self.times
         draw = st_list.count('d') / self.times
         lose = st_list.count('l') / self.times
-        print(win,draw,lose,self.times)
-        return win,draw,lose
+        print(self.lvla, self.lvlb)
+        print(win, draw, lose, self.times)
+        return win, draw, lose
 
 
