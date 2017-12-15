@@ -18,10 +18,10 @@ A brief introduction on our project about **M**onte **C**arlo **S**imulation.
   
 ## Project
 ### Project Structure
-check the file [Framework_project](https://github.com/yingjun2/Final-project/blob/master/Framework_Project)
+**check the file [Framework_project](https://github.com/yingjun2/Final-project/blob/master/Framework_Project)**
 
 ### Project usage
-Clone the whole repository to the local space, run Model/Board_GUI.py. 
+**Clone the whole repository to the local space, run Model/Board_GUI.py. **
 
 ### Background:
 [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) is a world famous game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
