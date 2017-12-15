@@ -1,5 +1,6 @@
-TIC-TAC-TOE PROJECT (WITH MONTE CARLO SIMULATION)
-[2017Fall 590PR Final Project]
+TIC-TAC-TOE PROJECT 
+-- APPLICATION OF MONTE CARLO SIMULATION
+> 2017Fall 590PR Final Project
 ==========
 
 A brief introduction on our project about **M**onte **C**arlo **S**imulation. 
