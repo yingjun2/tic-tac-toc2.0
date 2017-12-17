@@ -69,6 +69,7 @@ A brief introduction on our project about **M**onte **C**arlo **S**imulation.
  - Tighter connection between 1st and 2nd modes.
  - Training the machine. / try other algorithms.
  - OOP improvement (eg: static programs.)
+ - The simplification of the program.
  
 ## Sources:
  - Software: Python 3.6 (PythonCharm), 
