@@ -326,7 +326,7 @@ class Easy_Test(BoardWindow,QMainWindow):
             >>> b=['X', 'X', 'O', 'X', '-', '-', '-', '-', 'O']
             >>> print(notFinish(b))
             False
-            """
+        """
         if (
                         self.isWin(board) is False and
                         board.count('-') != 0
