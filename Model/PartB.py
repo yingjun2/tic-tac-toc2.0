@@ -54,8 +54,6 @@ class partb():
             state = 'w';
         elif self.isDraw(board) == 1:
             state = 'd';
-        # elif Med_Test.isDraw(self, board) == 1:
-        #     state = 'd';
         elif self.isLost(board) == 1:
             state = 'l';
         # print(state)
