@@ -142,7 +142,7 @@ class PartB:
         # print(board)##
         return board
 
-    def MC_trail(self, board, pc, n=1, w2=[0] * 9, l2=[0] * 9, d2=[0] * 9):
+    def MC_trail(self, board, pc, n=100, w2=[0] * 9, l2=[0] * 9, d2=[0] * 9):
         # choice = self.chooseRandomMoveFromList()
         """
         what does w2,l2,d2,board,pc mean?
@@ -164,15 +164,15 @@ class PartB:
             x += 1
             choice = random.choice(pc)
             board1 = copy.copy(board)
-            if self.isWin(self.selection(board1, choice)) is True:
+            if PartB.isWin(PartB.selection(board1, choice)) is True:
                 w2[choice] += 1
             # elif self.isXLost(self.selection(board1,choice)) is True:
             #     l2[choice] += 1
-            elif self.isDraw(self.selection(board1, choice)) is True:
+            elif PartB.isDraw(PartB.selection(board1, choice)) is True:
                 d2[choice] += 1
-            elif self.notFinished(self.selection(board1, choice)) is True:
+            elif PartB.notFinished(PartB.selection(board1, choice)) is True:
                 # choice1 = [i for i, j in enumerate(board1) if j == '-']
-                choice1 = self.chooseRandomMoveFromList(board1)
+                choice1 = PartB.chooseRandomMoveFromList(board1)
                 (w3, l3, d3) = self.MC_trail(board1, choice1, 1, w2, l2, d2)
                 if sum(w3) - sum(w2) != 0:
                     l2[choice] += 1
@@ -219,19 +219,20 @@ class PartB:
 
         return move
 
-    def chooseRandomMoveFromList(self, board):
+    @staticmethod
+    def chooseRandomMoveFromList(board):
         pc = [i for i, j in enumerate(board) if j == '-']
         #     print(pc)
         return pc
 
     def hard(self, board):
-        pc = self.chooseRandomMoveFromList(board)
+        pc = PartB.chooseRandomMoveFromList(board)
         (w2, l2, d2) = self.MC_trail(board, pc, self.times, [0] * 9, [0] * 9, [0] * 9)
-        move = self.auto_selection(w2, l2)
+        move = PartB.auto_selection(w2, l2)
         while move not in pc:
-            move = self.auto_selection(w2, l2)
+            move = PartB.auto_selection(w2, l2)
         # move = random.choice(pc)
-        self.selection(board, move)
+        PartB.selection(board, move)
         #         board.pop(0)
         #         m = board.count('-')
         # print(board)##
