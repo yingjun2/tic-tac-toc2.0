@@ -359,9 +359,9 @@ class PartB:
 
 
 # def main():
-#     test = partb('easy', 'easy', 100)
+#     test = PartB('easy', 'easy', 100)
 #     print(test.board)
-#     state = partb.single_game(test)
+#     state = PartB.single_game(test)
 #     print(state)
 #
 #
