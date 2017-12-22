@@ -3,7 +3,7 @@ import random
 from Model.Med_MCplay import Med_Test
 
 
-class partb():
+class PartB:
     def __init__(self, lvla, lvlb, times):
         from View.Board_GUI import chalWindow
         self.chalWindow = chalWindow()
@@ -17,9 +17,6 @@ class partb():
         from Model.Hard_MCplay import Hard_Test
         self.Hard_Test = Hard_Test()
 
-    #         print(self.lvla,self.lvlb)
-    #         print(self.board)
-
     @staticmethod
     def judge(board):
         """
@@ -28,11 +25,11 @@ class partb():
         :return: state of 'w', 'l' or 'd'
 
         """
-        if partb.isWinner(board) == 1:
+        if PartB.isWinner(board) == 1:
             state = 'w';
-        elif partb.isDraw(board) == 1:
+        elif PartB.isDraw(board) == 1:
             state = 'd';
-        elif partb.isLost(board) == 1:
+        elif PartB.isLost(board) == 1:
             state = 'l';
         else:
             state = None
@@ -44,7 +41,6 @@ class partb():
         m = board.count('-')
         while m > 0:
             if m % 2 == 1:
-                # print(self.lvla) ##
                 if self.lvla == 'easy':
                     self.easy(board)
                     # m = board.count('-')
@@ -66,8 +62,8 @@ class partb():
                     self.hard(board)
                     # m = board.count('-')
 
-            state = partb.judge(board)
-            if state in ['l','w','d']:
+            state = PartB.judge(board)
+            if state in ['l', 'w', 'd']:
                 # print(board)
                 print(state)
                 # return state
