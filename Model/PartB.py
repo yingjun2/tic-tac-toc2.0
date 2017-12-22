@@ -20,6 +20,25 @@ class partb():
     #         print(self.lvla,self.lvlb)
     #         print(self.board)
 
+    @staticmethod
+    def judge(board):
+        """
+        The method is for judging the current status of the board finish or not.
+        :param board: a list of position status.
+        :return: state of 'w', 'l' or 'd'
+
+        """
+        if partb.isWinner(board) == 1:
+            state = 'w';
+        elif partb.isDraw(board) == 1:
+            state = 'd';
+        elif partb.isLost(board) == 1:
+            state = 'l';
+        else:
+            state = None
+        # print(state)
+        return state
+
     def single_game(self, board):
         board = self.board[:]
         m = board.count('-')
@@ -28,35 +47,35 @@ class partb():
                 # print(self.lvla) ##
                 if self.lvla == 'easy':
                     self.easy(board)
-                    m = board.count('-')
+                    # m = board.count('-')
                 elif self.lvla == 'medium':
                     self.medium(board)
-                    m = board.count('-')
+                    # m = board.count('-')
                 elif self.lvla == 'hard':
                     self.hard(board)
-                    m = board.count('-')
-
-            if (m % 2 == 0) & (m != 0):
+                    # m = board.count('-')
+            elif (m % 2 == 0) & (m != 0):
                 # print(self.lvlb) ##
                 if self.lvlb == 'easy':
                     self.easy(board)
-                    m = board.count('-')
+                    # m = board.count('-')
                 elif self.lvlb == 'medium':
                     self.medium(board)
-                    m = board.count('-')
+                    # m = board.count('-')
                 elif self.lvlb == 'hard':
                     self.hard(board)
-                    m = board.count('-')
+                    # m = board.count('-')
 
+            state = partb.judge(board)
+            if state in ['l','w','d']:
+                # print(board)
+                print(state)
+                break
+                # return state
+            else:
+                m = board.count('-')
 
-                    # print(board)
-        if self.isWinner(board) == 1:
-            state = 'w';
-        elif self.isDraw(board) == 1:
-            state = 'd';
-        elif self.isLost(board) == 1:
-            state = 'l';
-        # print(state)
+        # print(board)
         return state
 
     def selection(self, board, n):
@@ -344,4 +363,14 @@ class partb():
         print(win, draw, lose, self.times)
         return win, draw, lose
 
+
+def main():
+    test = partb('easy', 'easy', 100)
+    print(test.board)
+    state = partb.single_game(test)
+    print(state)
+
+
+if __name__ == '__main__':
+    main()
 
