@@ -75,7 +75,8 @@ class PartB:
         # print(board)
         return state
 
-    def selection(self, board, n):
+    @staticmethod
+    def selection(board, n):
         """
         This is the selection. turn the move selected into effect.
         """
@@ -85,26 +86,24 @@ class PartB:
                 board[n] = '0'
             else:
                 board[n] = 'X'
-                #     else:
-                #         print("The position has already been occupied")
         return board
 
-    def easy(self, board):
+    @staticmethod
+    def easy(board):
         pc = [i for i, j in enumerate(board) if j == '-']
         move = random.choice(pc)
-        self.selection(board, move)
-        #         board = self.selection(board, move)
-        #         board.pop(0)
-        #         m = board.count('-')
-        # print(board)##
+        PartB.selection(board, move)
         return board
 
-    def MC_trail1(self, board: object, pc: object, n: object = 1, w2: object = [0] * 9, l2: object = [0] * 9,
+    @staticmethod
+    def MC_trail1(board, pc, n: object = 100, w2: object = [0] * 9, l2: object = [0] * 9,
                   d2: object = [0] * 9) -> object:
         # choice = self.chooseRandomMoveFromList()
         """
 
         player positions
+        :param n:
+        :param n:
         :type board: object
         """
         x = 0
@@ -112,11 +111,9 @@ class PartB:
             x += 1
             choice = random.choice(pc)
             board1 = copy.copy(board)
-            if self.isWin(Med_Test.selection(board1, choice)) is True:
+            if PartB.isWin(PartB.selection(board1, choice)) is True:
                 w2[choice] += 1
-            # elif self.isXLost(self.selection(board1,choice)) is True:
-            #     l2[choice] += 1
-            elif self.isDraw(self.selection(board1, choice)) is True:
+            elif PartB.isDraw(PartB.selection(board1, choice)) is True:
                 d2[choice] += 1
                 # elif self.notFinished(self.selection(board1,choice)) is True:
                 #     choice1 = self.chooseRandomMoveFromList(board1)
@@ -129,17 +126,17 @@ class PartB:
                 #     if sum(d3) - sum(d2) != 0:
                 #         d2[choice] += 1
 
-        return (w2, l2, d2)
+        return w2, l2, d2
 
     def medium(self, board):
         pc = [i for i, j in enumerate(board) if j == '-']
         (w2, l2, d2) = self.MC_trail1(board, pc, self.times, [0] * 9, [0] * 9, [0] * 9)
         # print(w2,l2,d2)
-        move = self.auto_selection(w2, l2, d2)
+        move = PartB.auto_selection(w2, l2)
         while move not in pc:
-            move = self.auto_selection(w2, l2, d2)
+            move = PartB.auto_selection(w2, l2)
         # move = random.choice(pc)
-        self.selection(board, move)
+        PartB.selection(board, move)
         #         board.pop(0)
         #         m = board.count('-')
         # print(board)##
@@ -186,23 +183,24 @@ class PartB:
 
         return w2, l2, d2
 
-    def selection(self, board, n):
-        """
-        This is a manually selection.
+    # def selection(self, board, n):
+    #     """
+    #     This is a manually selection.
+    #
+    #     For the
+    #     """
+    #     if board[n] == '-':
+    #         m = board.count('-')
+    #         if m % 2 == 0:
+    #             board[n] = '0'
+    #         else:
+    #             board[n] = 'X'
+    #             #     else:
+    #             #         print("The position has already been occupied")
+    #     return board
 
-        For the
-        """
-        if board[n] == '-':
-            m = board.count('-')
-            if m % 2 == 0:
-                board[n] = '0'
-            else:
-                board[n] = 'X'
-                #     else:
-                #         print("The position has already been occupied")
-        return board
-
-    def auto_selection(self, w2, l2, d2) -> int:
+    @staticmethod
+    def auto_selection(w2, l2) -> int:
 
         # this is a 2nd method for auto-selection.
         # The problem is that that max wining occurrence is not enough to win.
@@ -229,9 +227,9 @@ class PartB:
     def hard(self, board):
         pc = self.chooseRandomMoveFromList(board)
         (w2, l2, d2) = self.MC_trail(board, pc, self.times, [0] * 9, [0] * 9, [0] * 9)
-        move = self.auto_selection(w2, l2, d2)
+        move = self.auto_selection(w2, l2)
         while move not in pc:
-            move = self.auto_selection(w2, l2, d2)
+            move = self.auto_selection(w2, l2)
         # move = random.choice(pc)
         self.selection(board, move)
         #         board.pop(0)
@@ -241,7 +239,8 @@ class PartB:
 
         return board
 
-    def isWin(self, board):
+    @staticmethod
+    def isWin(board):
         """
         GIven a board checks if it is in a winning state.
         Arguments:
@@ -271,7 +270,7 @@ class PartB:
         if (
                             board[0] is board[4] and
                             board[4] is board[8] and
-                        board[4] is not '-'
+                board[4] is not '-'
         ):
             return True
 
@@ -283,8 +282,8 @@ class PartB:
 
         return False
 
-    #
-    def isWinner(self, board):
+    @staticmethod
+    def isWinner(board):
         """
             This is to define the status of "isWin" (for X).
 
@@ -292,15 +291,14 @@ class PartB:
             >>> print(isWin(bb))
             True
             """
-        if (
-                        self.isWin(board) is True and
-                            board.count('-') % 2 == 0
-        ):
+        if (PartB.isWin(board) is True and
+                board.count('-') % 2 == 0):
             return True
 
         return False
 
-    def isDraw(self, board):
+    @staticmethod
+    def isDraw(board):
         """
         This is to define the status of "isDraw".
 
@@ -308,24 +306,23 @@ class PartB:
         >>> print(isDraw(bb))
         True
         """
-        if (
-                        self.isWin(board) is False and
-                        board.count('-') == 0
-        ):
+        if (PartB.isWin(board) is False and
+                board.count('-') == 0):
             return True
 
         return False
 
-    def isLost(self, board):
+    @staticmethod
+    def isLost(board):
         if (
-                        self.isWin(board) is True and
-                            board.count('-') % 2 == 1
-        ):
+                        PartB.isWin(board) is True and
+                board.count('-') % 2 == 1):
             return True
 
         return False
 
-    def notFinished(self, board):
+    @staticmethod
+    def notFinished(board):
         """
             This is to define the status of "notFinish".
 
@@ -333,10 +330,8 @@ class PartB:
             >>> print(notFinish(b))
             False
             """
-        if (
-                        self.isWin(board) is False and
-                        board.count('-') != 0
-        ):
+        if (PartB.isWin(board) is False and
+                board.count('-') != 0):
             return True
 
         return False
