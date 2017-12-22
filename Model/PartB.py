@@ -352,7 +352,7 @@ class partb():
         #         print(self.times)
         while x < self.times:
             s = self.single_game(self.board)
-            print(s)
+            # print(s)
             st_list.append(s)
             x += 1
 
