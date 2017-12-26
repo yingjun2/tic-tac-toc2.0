@@ -358,13 +358,13 @@ class PartB:
         return win, draw, lose
 
 
-# def main():
-#     test = PartB('easy', 'easy', 100)
-#     print(test.board)
-#     state = PartB.single_game(test)
-#     print(state)
-#
-#
-# if __name__ == '__main__':
-#     main()
+def main():
+    test = PartB('easy', 'easy', 100)
+    print(test.board)
+    state = PartB.single_game(test)
+    print(state)
+
+
+if __name__ == '__main__':
+    main()
 
